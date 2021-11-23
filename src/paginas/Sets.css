@@ -1,0 +1,16 @@
+.navButtons {
+    margin-left: auto;
+}
+
+.new-set-form {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.setButton {
+    justify-content: end;
+}
+
+.title {
+    text-align: center;
+}

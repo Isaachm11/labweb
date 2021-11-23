@@ -33,12 +33,13 @@ function NavBar() {
             color="inherit"
             aria-label="outlined button group"
           >
-            <Button href="/dashboard">Home</Button>
+            <Button href="/">Home</Button>
             <Button href="/sets">Sets</Button>
             <Button href="/users">Users</Button>
-            <Button href="/" color="secondary" onClick={logOut}>
+            <Button href="/logout">Logout</Button>
+            {/* <Button href="/" color="secondary" onClick={logOut}>
               Logout
-            </Button>
+            </Button> */}
           </ButtonGroup>
         </Toolbar>
       </AppBar>

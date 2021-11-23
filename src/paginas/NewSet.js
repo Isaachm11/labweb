@@ -1,6 +1,9 @@
 // import getFirebase from "../firebase/firebaseconfiguration";
-// import "firebase";
-import { collection, doc, setDoc } from "firebase/firestore";
+// import { getFirestore } from "@firebase/firestore";
+// import firebase from "@firebase/app-compat";
+
+import getFirebase from "../firebase/firebaseconfiguration";
+import { collection, addDoc } from "firebase/firestore";
 import {
   Button,
   MenuItem,
@@ -15,10 +18,13 @@ import { v4 as uuidv4 } from "uuid";
 import NavBar from "../components/NavBar";
 
 import "./NewSet.css";
+import FirebaseFunctions from "../funciones/FirebaseFunctions";
 
 // const ref = firebase.firestore().collection("sets");
 const firebase = getFirebase();
 // const firestore = firebase.firestore().collection("sets");
+
+const db = firebase.firestore();
 
 export default function NewSet() {
   //Set the category's value
@@ -41,16 +47,42 @@ export default function NewSet() {
   //Set the title's value
   const [title, setTitle] = useState("");
 
-  function addSet(newSet) {
-    ref
-      .doc(newSet.id)
-      .set(newSet)
-      .catch((err) => {
-        console.error(err);
-      });
+  // Add a new document with a generated id.
+  // const docRef = await addDoc(collection(db, "cities"), {
+  //   name: "Tokyo",
+  //   country: "Japan",
+  // });
+  // console.log("Document written with ID: ", docRef.id);
 
-    return <Redirect to="/sets" />;
+  function addSet(newSet) {
+    const docRef = addDoc(collection(db, "sets"), {
+      title: newSet.title,
+      category: newSet.category,
+      desc: newSet.desc,
+      initDate: newSet.initDate,
+      firstQuestion: newSet.firstQuestion,
+      secondQuestion: newSet.secondQuestion,
+      questionOneOne: newSet.questionOneOne,
+      questionOneTwo: newSet.questionOneTwo,
+      questionOneThree: newSet.questionOneThree,
+      questionTwoOne: newSet.questionTwoOne,
+      questionTwoTwo: newSet.questionTwoTwo,
+      questionTwoThree: newSet.questionTwoThree,
+      id: newSet.id,
+    });
+    console.log("Document written with ID: ", docRef.id);
   }
+
+  // function addSet(newSet) {
+  //   ref
+  //     .doc(newSet.id)
+  //     .set(newSet)
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+
+  //   return <Redirect to="/sets" />;
+  // }
 
   return (
     <>

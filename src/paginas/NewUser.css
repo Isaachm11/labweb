@@ -1,0 +1,25 @@
+.new-set-form {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.newSetInput {
+    padding-top: 5px;
+}
+
+.setDate {
+    width: auto;
+}
+
+.setDescription {
+    padding-top: 10px;
+    width: 1000px;
+}
+
+.set-input {
+    padding-top: 20px;
+}
+
+.question-sets {
+    padding-top: 25px;
+}

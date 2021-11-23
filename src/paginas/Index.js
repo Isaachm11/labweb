@@ -9,6 +9,9 @@ import getFirebase from "../firebase/firebaseconfiguration";
 // New imports
 import Home from "./Home";
 import NewSet from "./NewSet";
+import Sets from "./Sets";
+import Users from "./Users";
+import NewUser from "./NewUser";
 
 export default function Index(props) {
   const firebase = getFirebase();
@@ -90,9 +93,12 @@ export default function Index(props) {
               />
             )}
           ></Route>
-          <Route path={"/new-set"}>
-            <NewSet />
+          <Route path={"/newSet"} component={NewSet}>
+            {/* <NewSet /> */}
           </Route>
+          <Route path={"/sets"} component={Sets}></Route>
+          <Route path={"/users"} component={Users}></Route>
+          <Route path={"/newUser"} component={NewUser}></Route>
         </Switch>
       ) : (
         <Switch>
