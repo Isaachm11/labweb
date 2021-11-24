@@ -20,8 +20,8 @@ import NavBar from "../components/NavBar";
 import "./NewSet.css";
 import FirebaseFunctions from "../funciones/FirebaseFunctions";
 
-// const ref = firebase.firestore().collection("sets");
 const firebase = getFirebase();
+const ref = firebase.firestore().collection("sets");
 // const firestore = firebase.firestore().collection("sets");
 
 const db = firebase.firestore();
@@ -54,35 +54,35 @@ export default function NewSet() {
   // });
   // console.log("Document written with ID: ", docRef.id);
 
-  function addSet(newSet) {
-    const docRef = addDoc(collection(db, "sets"), {
-      title: newSet.title,
-      category: newSet.category,
-      desc: newSet.desc,
-      initDate: newSet.initDate,
-      firstQuestion: newSet.firstQuestion,
-      secondQuestion: newSet.secondQuestion,
-      questionOneOne: newSet.questionOneOne,
-      questionOneTwo: newSet.questionOneTwo,
-      questionOneThree: newSet.questionOneThree,
-      questionTwoOne: newSet.questionTwoOne,
-      questionTwoTwo: newSet.questionTwoTwo,
-      questionTwoThree: newSet.questionTwoThree,
-      id: newSet.id,
-    });
-    console.log("Document written with ID: ", docRef.id);
-  }
-
   // function addSet(newSet) {
-  //   ref
-  //     .doc(newSet.id)
-  //     .set(newSet)
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-
-  //   return <Redirect to="/sets" />;
+  //   const docRef = addDoc(collection(db, "sets"), {
+  //     title: newSet.title,
+  //     category: newSet.category,
+  //     desc: newSet.desc,
+  //     initDate: newSet.initDate,
+  //     firstQuestion: newSet.firstQuestion,
+  //     secondQuestion: newSet.secondQuestion,
+  //     questionOneOne: newSet.questionOneOne,
+  //     questionOneTwo: newSet.questionOneTwo,
+  //     questionOneThree: newSet.questionOneThree,
+  //     questionTwoOne: newSet.questionTwoOne,
+  //     questionTwoTwo: newSet.questionTwoTwo,
+  //     questionTwoThree: newSet.questionTwoThree,
+  //     id: newSet.id,
+  //   });
+  //   console.log("Document written with ID: ", docRef.id);
   // }
+
+  function addSet(newSet) {
+    ref
+      .doc(newSet.id)
+      .set(newSet)
+      .catch((err) => {
+        console.error(err);
+      });
+
+    return <Redirect to="/sets" />;
+  }
 
   return (
     <>

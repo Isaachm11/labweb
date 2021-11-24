@@ -15,7 +15,15 @@ import {
 // Import the next line to add firebase to file
 // import firebase from "./firebase";
 import getFirebase from "../firebase/firebaseconfiguration";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  where,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import React, { useState, useEffect } from "react";
 
 import NavBar from "../components/NavBar";
@@ -48,29 +56,53 @@ export default function Sets() {
   const db = firebase.firestore();
   const refSets = firebase.firestore().collection("sets");
 
-  // function deleteSet(set) {
-  //   refSets
-  //     .doc(set.id)
-  //     .delete()
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // }
-
   function deleteSet(set) {
-    deleteDoc(doc(db, refSets, set));
+    refSets
+      .doc(set.id)
+      .delete()
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
-  // function editSet(updatedSet) {
-  //   setLoading();
-  //   console.log(updatedSet);
-  //   refSets
-  //     .doc(updatedSet.id)
-  //     .update(updatedSet)
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
+  // function deleteSet(set) {
+  //   // console.log(String(set.id));
+  //   // console.log();
+  //   // console.log(db);
+  //   // console.log(refSets);
+  //   // deleteDoc(doc(db, refSets, id));
+
+  //   // const set_query = db.collection("sets").where("id", "==", set.id);
+  //   // const q = query(citiesRef, where("state", "==", "CA"));
+
+  //   const q = query(collection(db, "sets"), where("id", "==", String(set.id)));
+  //   const querySnapshot = getDocs(q);
+
+  //   querySnapshot.forEach((doc) => {
+  //     // doc.data() is never undefined for query doc snapshots
+  //     // console.log(doc.id, " => ", doc.data());
+  //     doc.ref.delete();
+  //   });
+
+  //   // q.get().then(function (querySnapshot) {
+  //   //   querySnapshot.forEach(function (doc) {
+  //   //     doc.ref.delete();
+  //   //   });
+  //   // });
+
+  //   // db.collection("sets").doc(q).delete();
   // }
+
+  function editSet(updatedSet) {
+    setLoading();
+    console.log(updatedSet);
+    refSets
+      .doc(updatedSet.id)
+      .update(updatedSet)
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
   // const washingtonRef = doc(db, "cities", "DC");
 
@@ -79,22 +111,22 @@ export default function Sets() {
   //   capital: true,
   // });
 
-  function editSet(updatedSet) {
-    const setRef = doc(db, refSets, updatedSet.id);
-    updateDoc(setRef, {
-      category: updatedSet.category,
-      desc: updatedSet.desc,
-      initDate: updatedSet.initDate,
-      firstQuestion: updatedSet.firstQuestion,
-      secondQuestion: updatedSet.secondQuestion,
-      questionOneOne: updatedSet.questionOneOne,
-      questionOneTwo: updatedSet.questionOneTwo,
-      questionOneThree: updatedSet.questionOneThree,
-      questionTwoOne: updatedSet.questionTwoOne,
-      questionTwoTwo: updatedSet.questionTwoTwo,
-      questionTwoThree: updatedSet.questionTwoThree,
-    });
-  }
+  // function editSet(updatedSet) {
+  //   const setRef = doc(db, refSets, updatedSet.id);
+  //   updateDoc(setRef, {
+  //     category: updatedSet.category,
+  //     desc: updatedSet.desc,
+  //     initDate: updatedSet.initDate,
+  //     firstQuestion: updatedSet.firstQuestion,
+  //     secondQuestion: updatedSet.secondQuestion,
+  //     questionOneOne: updatedSet.questionOneOne,
+  //     questionOneTwo: updatedSet.questionOneTwo,
+  //     questionOneThree: updatedSet.questionOneThree,
+  //     questionTwoOne: updatedSet.questionTwoOne,
+  //     questionTwoTwo: updatedSet.questionTwoTwo,
+  //     questionTwoThree: updatedSet.questionTwoThree,
+  //   });
+  // }
 
   function getSets() {
     setLoading(true);
