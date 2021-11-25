@@ -20,6 +20,19 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+	<script>
+		  window.watsonAssistantChatOptions = {
+		      integrationID: "3690ae3e-29c2-4667-a5dc-25077be432c8", // The ID of this integration.
+		      region: "au-syd", // The region your integration is hosted in.
+		      serviceInstanceID: "2a74329e-ce4e-4394-9b2a-27d3bc61f8e3", // The ID of your service instance.
+		      onLoad: function(instance) { instance.render(); }
+		    };
+		  setTimeout(function(){
+		    const t=document.createElement('script');
+		    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+		    document.head.appendChild(t);
+		  });
+	</script>
 	<title>React App</title>
 </head>
 
