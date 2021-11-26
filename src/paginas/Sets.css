@@ -1,16 +1,28 @@
+#sets {
+  padding: 0 40px;
+}
+
+#initDate {
+  color: white;
+}
+
 .navButtons {
-    margin-left: auto;
+  margin-left: auto;
 }
 
 .new-set-form {
-    padding-top: 10px;
-    text-align: center;
+  padding-top: 10px;
+  text-align: center;
 }
 
 .setButton {
-    justify-content: end;
+  justify-content: end;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
+}
+
+#category {
+  width: 150px;
 }

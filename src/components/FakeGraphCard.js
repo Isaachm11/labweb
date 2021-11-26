@@ -11,15 +11,30 @@ import {
   Grid,
 } from "@material-ui/core";
 import React from "react";
+import "./FakeGraphCard.css";
 
 const useCardStyles = makeStyles({
   root: {
     width: 345,
+    borderRadius: 20,
+    boxShadow: "10px 15px 15px #480CA8",
+    backgroundColor: "#e9ecef",
+  },
+
+  button: {
+    paddingTop: 10,
   },
 
   media: {
     width: 200,
     height: 200,
+    margin: "auto",
+    borderRadius: 10,
+  },
+
+  textLeft: {
+    marginLeft: "auto",
+    color: "#4CC9F0",
   },
 });
 
@@ -40,11 +55,11 @@ export default function FakeGraphCard() {
   const secondClasses = useGridStyles();
 
   return (
-    <div className={secondClasses.root}>
+    <div className={secondClasses.root} id={"cards"}>
       <Grid container spacing={3}>
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -62,7 +77,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>
@@ -71,7 +90,7 @@ export default function FakeGraphCard() {
 
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -89,7 +108,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>
@@ -98,7 +121,7 @@ export default function FakeGraphCard() {
 
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -116,7 +139,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>
@@ -125,7 +152,7 @@ export default function FakeGraphCard() {
 
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -143,7 +170,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>
@@ -152,7 +183,7 @@ export default function FakeGraphCard() {
 
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -170,7 +201,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>
@@ -179,7 +214,7 @@ export default function FakeGraphCard() {
 
         <Grid item xs>
           <Card className={firstClasses.root}>
-            <CardActionArea>
+            <CardActionArea className={firstClasses.button}>
               <CardMedia
                 component="img"
                 className={firstClasses.media}
@@ -197,7 +232,11 @@ export default function FakeGraphCard() {
             </CardActionArea>
 
             <CardActions>
-              <Button size="small" color="primary">
+              <Button
+                size="small"
+                color="primary"
+                className={firstClasses.textLeft}
+              >
                 Learn More
               </Button>
             </CardActions>

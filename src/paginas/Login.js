@@ -1,12 +1,12 @@
 import * as React from "react";
 import { Avatar, Button } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+// import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import FingerprintIcon from "@mui/icons-material/Fingerprint";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -16,6 +16,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import getFirebase from "../firebase/firebaseconfiguration";
 import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { Link } from "react-router-dom";
+import "./Login.css";
 
 function Copyright(props) {
   return (
@@ -33,7 +34,9 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
+const theme = createTheme({
+  spacing: 4,
+});
 
 export default function SignIn(props) {
   const google = new GoogleAuthProvider();
@@ -52,7 +55,6 @@ export default function SignIn(props) {
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
@@ -61,8 +63,8 @@ export default function SignIn(props) {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar className={"avatar"}>
+            <FingerprintIcon id={"fingerprint"} />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -94,7 +96,9 @@ export default function SignIn(props) {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox value="remember" style={{ color: "#F72585" }} />
+              }
               label="Remember me"
             />
             <Button

@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import SignIn from "./paginas/Login";
 import Index  from "./paginas/Index";
 import utilsFunctions from "./funciones/FirebaseFunctions";
+
 export default function App(props) {
   //console.log("props-> App");
   //console.log(props);
@@ -41,7 +42,7 @@ export default function App(props) {
     <p> cargando</p>
   ) : (
     <div className="App">
-      <h1>{currentUser} </h1>
+      {/* <h1>{currentUser} </h1> */}
       <Index
         socialLogin={socialLogin}
         currentUser={currentUser}

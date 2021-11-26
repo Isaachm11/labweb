@@ -26,7 +26,7 @@ const ref = firebase.firestore().collection("sets");
 
 const db = firebase.firestore();
 
-export default function NewSet() {
+export default function NewSet({currentUser}) {
   //Set the category's value
   const [category, setCategory] = useState("");
   //Set the description's value
@@ -85,8 +85,8 @@ export default function NewSet() {
   }
 
   return (
-    <>
-      <NavBar />
+    <div>
+      <NavBar currentUser={currentUser} />
       <span class="new-set-body">
         <Button color="secondary" href="/sets" variant="contained">
           Go back
@@ -257,6 +257,6 @@ export default function NewSet() {
           </div>
         </span>
       </form>
-    </>
+    </div>
   );
 }

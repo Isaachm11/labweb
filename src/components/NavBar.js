@@ -8,10 +8,11 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useContext } from "react";
+import "./NavBar.css"
 
 /* import { AuthContext } from '../pages/auth/Auth'; */
 
-function NavBar() {
+function NavBar({ currentUser }) {
   /* const { currentUser } = useContext(AuthContext); */
   /* const currentUserEmail = currentUser ? currentUser.email : ''; */
 
@@ -23,9 +24,12 @@ function NavBar() {
 
   return (
     <div>
-      <AppBar color="primary" position="sticky">
+      <AppBar color="primary" position="sticky" id={"navbar"} >
         <Toolbar className="toolBar" variant="regular">
-          <Typography variant="h5">KNOWLEDGE RALLY</Typography>
+          <Typography variant="h5">Welcome, {currentUser} to...</Typography>
+          <Typography variant="h5" className="ml-auto">
+            KNOWLEDGE RALLY
+          </Typography>
           {/* <Typography variant='body2'>{`Welcome ${currentUserEmail}`}</Typography> */}
           <ButtonGroup
             className="navButtons"

@@ -11,6 +11,7 @@ import {
   TableRow,
   TextField,
   Typography,
+  makeStyles,
 } from "@material-ui/core";
 // Import the next line to add firebase to file
 // import firebase from "./firebase";
@@ -30,7 +31,34 @@ import NavBar from "../components/NavBar";
 
 import "./Sets.css";
 
-export default function Sets() {
+const useTableStyles = makeStyles({
+  root: {
+    borderRadius: 20,
+    boxShadow: "10px 15px 15px #480CA8",
+    backgroundColor: "#e9ecef",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+});
+
+const useButtonStyles = makeStyles({
+  primary: {
+    fontSize: 20,
+    backgroundColor: "#4CC9F0",
+    color: "#fff",
+    marginLeft: "auto",
+  },
+  danger: {
+    backgroundColor: "#B5179E",
+    color: "#fff",
+  },
+  edit: {
+    backgroundColor: "#B5179E",
+    color: "#fff",
+  },
+});
+
+export default function Sets({currentUser}) {
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState([]);
 
@@ -147,231 +175,237 @@ export default function Sets() {
     getSets();
   }, []);
 
+  const tableClasses = useTableStyles();
+  const buttonsClasses = useButtonStyles();
+
   if (loading) {
     return <Typography variant="h3">Loading...</Typography>;
   }
 
   return (
     <div>
-      <NavBar />
-      <span class="setButton">
+      <NavBar currentUser={currentUser} />
+      <div id="sets">
         <Button
-          className="newSetButton"
+          className={buttonsClasses.primary}
           color="default"
           href="/newSet"
           variant="contained"
         >
           Create new set
         </Button>
-      </span>
-      <Typography className="title" variant="h4">
-        Question Sets
-      </Typography>
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Set Title</TableCell>
-              <TableCell align="center">Description</TableCell>
-              <TableCell align="center">Launch date</TableCell>
-              <TableCell align="center">Category</TableCell>
-              <TableCell align="center">Question 1</TableCell>
-              <TableCell align="center">Answers for Q1</TableCell>
-              <TableCell align="center">Question 2</TableCell>
-              <TableCell align="center">Answers for Q2</TableCell>
-              <TableCell align="center">Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {questions.map((set) => (
-              <TableRow key={set.id}>
-                <TableCell component="th" scope="row">
-                  {set.title}
-                </TableCell>
-                <TableCell>{set.desc}</TableCell>
-                <TableCell>{set.initDate}</TableCell>
-                <TableCell>{set.category}</TableCell>
-                <TableCell>{set.firstQuestion}</TableCell>
-                <TableCell>
-                  <Typography>1. {set.questionOneOne}</Typography>
-                  <Typography>2. {set.questionOneTwo}</Typography>
-                  <Typography>3. {set.questionOneThree}</Typography>
-                </TableCell>
-                <TableCell>{set.secondQuestion}</TableCell>
-                <TableCell>
-                  <Typography>1. {set.questionTwoOne}</Typography>
-                  <Typography>2. {set.questionTwoTwo}</Typography>
-                  <Typography>3. {set.questionTwoThree}</Typography>
-                </TableCell>
-                <TableCell align="center">
-                  <Button
-                    color="secondary"
-                    variant="contained"
-                    onClick={() => deleteSet(set)}
-                  >
-                    Delete
-                  </Button>
-
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={() =>
-                      editSet({
-                        title: set.title,
-                        category,
-                        desc,
-                        initDate,
-                        firstQuestion,
-                        questionOneOne,
-                        questionOneTwo,
-                        questionOneThree,
-                        questionTwoOne,
-                        questionTwoTwo,
-                        questionTwoThree,
-                        secondQuestion,
-                        id: set.id,
-                      })
-                    }
-                  >
-                    Edit
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
-      <div>
         <Typography className="title" variant="h4">
-          Edit a set
+          Question Sets
         </Typography>
-      </div>
-      <div>
-        <div className="new-set-form">
-          <div>
-            <TextField
-              className="setDescription"
-              label="Description"
-              type="text"
-              id="desc"
-              variant="outlined"
-              onChange={(e) => setDesc(e.target.value)}
-            />
-          </div>
-          <div>
-            <Typography>Choose a category</Typography>
-            <Select id="category" onChange={(c) => setCategory(c.target.value)}>
-              <MenuItem value="geography">Geography</MenuItem>
-              <MenuItem value="history">History</MenuItem>
-              <MenuItem value="science">Science</MenuItem>
-              <MenuItem value="sports">Sports</MenuItem>
-              <MenuItem value="training">Training</MenuItem>
-            </Select>
-          </div>
-          <br />
-          <div>
-            <Typography>
-              Write the date in which the game will be published
-            </Typography>
-            <TextField
-              className="setDate"
-              type="date"
-              id="initDate"
-              variant="outlined"
-              onChange={(e) => setInitDate(e.target.value)}
-            />
-          </div>
-          <br />
-          <Typography variant="h5">
-            Write up to 2 questions with 3 answers.
+        <TableContainer component={Paper} className={tableClasses.root}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Set Title</TableCell>
+                <TableCell align="center">Description</TableCell>
+                <TableCell align="center">Launch date</TableCell>
+                <TableCell align="center">Category</TableCell>
+                <TableCell align="center">Question 1</TableCell>
+                <TableCell align="center">Answers for Q1</TableCell>
+                <TableCell align="center">Question 2</TableCell>
+                <TableCell align="center">Answers for Q2</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {questions.map((set) => (
+                <TableRow key={set.id}>
+                  <TableCell component="th" scope="row">
+                    {set.title}
+                  </TableCell>
+                  <TableCell>{set.desc}</TableCell>
+                  <TableCell>{set.initDate}</TableCell>
+                  <TableCell>{set.category}</TableCell>
+                  <TableCell>{set.firstQuestion}</TableCell>
+                  <TableCell>
+                    <Typography>1. {set.questionOneOne}</Typography>
+                    <Typography>2. {set.questionOneTwo}</Typography>
+                    <Typography>3. {set.questionOneThree}</Typography>
+                  </TableCell>
+                  <TableCell>{set.secondQuestion}</TableCell>
+                  <TableCell>
+                    <Typography>1. {set.questionTwoOne}</Typography>
+                    <Typography>2. {set.questionTwoTwo}</Typography>
+                    <Typography>3. {set.questionTwoThree}</Typography>
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button
+                      className={buttonsClasses.danger}
+                      variant="contained"
+                      onClick={() => deleteSet(set)}
+                    >
+                      Delete
+                    </Button>
+
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={() =>
+                        editSet({
+                          title: set.title,
+                          category,
+                          desc,
+                          initDate,
+                          firstQuestion,
+                          questionOneOne,
+                          questionOneTwo,
+                          questionOneThree,
+                          questionTwoOne,
+                          questionTwoTwo,
+                          questionTwoThree,
+                          secondQuestion,
+                          id: set.id,
+                        })
+                      }
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <div>
+          <Typography className="title" variant="h4">
+            Edit a set
           </Typography>
-          <div>
-            <Typography>Question 1</Typography>
-            <TextField
-              className="setDescription"
-              label="1st question"
-              type="text"
-              id="setQuestion1"
-              variant="outlined"
-              onChange={(first) => setFirstQuestion(first.target.value)}
-            />
-          </div>
-          <Typography>Answers for question 1</Typography>
-          <div>
+        </div>
+        <div>
+          <div className="new-set-form">
             <div>
               <TextField
                 className="setDescription"
-                label="1st - The correct one"
+                label="Description"
                 type="text"
-                id="setAnswer1-1"
+                id="desc"
                 variant="outlined"
-                onChange={(f) => setQOneOne(f.target.value)}
+                onChange={(e) => setDesc(e.target.value)}
               />
             </div>
             <div>
+              <Typography>Choose a category</Typography>
+              <Select
+                id="category"
+                onChange={(c) => setCategory(c.target.value)}
+              >
+                <MenuItem value="geography">Geography</MenuItem>
+                <MenuItem value="history">History</MenuItem>
+                <MenuItem value="science">Science</MenuItem>
+                <MenuItem value="sports">Sports</MenuItem>
+                <MenuItem value="training">Training</MenuItem>
+              </Select>
+            </div>
+            <br />
+            <div>
+              <Typography>
+                Write the date in which the game will be published
+              </Typography>
               <TextField
-                className="setDescription"
-                label="2nd"
-                type="text"
-                id="setAnswer1-2"
+                className="setDate"
+                type="date"
+                id="initDate"
                 variant="outlined"
-                onChange={(f) => setQOneTwo(f.target.value)}
+                onChange={(e) => setInitDate(e.target.value)}
               />
             </div>
+            <br />
+            <Typography variant="h5">
+              Write up to 2 questions with 3 answers.
+            </Typography>
             <div>
+              <Typography>Question 1</Typography>
               <TextField
                 className="setDescription"
-                label="3rd"
+                label="1st question"
                 type="text"
-                id="setAnswer1-3"
+                id="setQuestion1"
                 variant="outlined"
-                onChange={(f) => setQOneThree(f.target.value)}
+                onChange={(first) => setFirstQuestion(first.target.value)}
               />
             </div>
-          </div>
-          <div>
-            <Typography>Question 2</Typography>
-            <TextField
-              className="setDescription"
-              label="2nd question"
-              type="text"
-              id="setQuestion2"
-              variant="outlined"
-              onChange={(second) => set2ndQuestion(second.target.value)}
-            />
-          </div>
-          <Typography>Answers for question 2</Typography>
-          <div>
+            <Typography>Answers for question 1</Typography>
             <div>
-              <TextField
-                className="setDescription"
-                label="1st - The correct one"
-                type="text"
-                id="setAnswer2-1"
-                variant="outlined"
-                onChange={(f) => setQTwoOne(f.target.value)}
-              />
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="1st - The correct one"
+                  type="text"
+                  id="setAnswer1-1"
+                  variant="outlined"
+                  onChange={(f) => setQOneOne(f.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="2nd"
+                  type="text"
+                  id="setAnswer1-2"
+                  variant="outlined"
+                  onChange={(f) => setQOneTwo(f.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="3rd"
+                  type="text"
+                  id="setAnswer1-3"
+                  variant="outlined"
+                  onChange={(f) => setQOneThree(f.target.value)}
+                />
+              </div>
             </div>
             <div>
+              <Typography>Question 2</Typography>
               <TextField
                 className="setDescription"
-                label="2nd"
+                label="2nd question"
                 type="text"
-                id="setAnswer2-2"
+                id="setQuestion2"
                 variant="outlined"
-                onChange={(f) => setQTwoTwo(f.target.value)}
+                onChange={(second) => set2ndQuestion(second.target.value)}
               />
             </div>
+            <Typography>Answers for question 2</Typography>
             <div>
-              <TextField
-                className="setDescription"
-                label="3rd"
-                type="text"
-                id="setAnswer3-3"
-                variant="outlined"
-                onChange={(f) => setQTwoThree(f.target.value)}
-              />
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="1st - The correct one"
+                  type="text"
+                  id="setAnswer2-1"
+                  variant="outlined"
+                  onChange={(f) => setQTwoOne(f.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="2nd"
+                  type="text"
+                  id="setAnswer2-2"
+                  variant="outlined"
+                  onChange={(f) => setQTwoTwo(f.target.value)}
+                />
+              </div>
+              <div>
+                <TextField
+                  className="setDescription"
+                  label="3rd"
+                  type="text"
+                  id="setAnswer3-3"
+                  variant="outlined"
+                  onChange={(f) => setQTwoThree(f.target.value)}
+                />
+              </div>
             </div>
           </div>
         </div>

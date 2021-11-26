@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import getFirebase from "./firebase/firebaseconfiguration";
 import createBrowserHistory from "history/createBrowserHistory";
-
+import './index.css'
 const history = createBrowserHistory({ forceRefresh: true });
 const rootElement = document.getElementById("root");
 

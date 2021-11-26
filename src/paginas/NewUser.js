@@ -19,7 +19,7 @@ const firebase = getFirebase();
 const db = firebase.firestore();
 const ref = firebase.firestore().collection("users");
 
-export default function NewUser() {
+export default function NewUser({currentUser}) {
   //Set the name
   const [name, setName] = useState("");
   //Set the last name
@@ -39,8 +39,8 @@ export default function NewUser() {
   }
 
   return (
-    <>
-      <NavBar />
+    <div>
+      <NavBar currentUser={currentUser} />
       <span class="new-set-body">
         <Button color="secondary" href="/users" variant="contained">
           Go back
@@ -101,6 +101,6 @@ export default function NewUser() {
           </div>
         </span>
       </form>
-    </>
+    </div>
   );
 }

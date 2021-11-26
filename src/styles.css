@@ -1,8 +1,10 @@
 .App {
+  min-height: 100vh;
+  height: 100%;
   font-family: sans-serif;
   text-align: center;
-  padding: 2%;
-  background-color: rgba(196, 214, 232, 0.2);
+  /* padding: 2%; */
+  background-color: #4895EF;
 }
 p {
   background-color: rgba(196, 214, 232, 0.1);

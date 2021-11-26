@@ -4,15 +4,13 @@ import "./Home.css";
 import FakeGraphCard from "../components/FakeGraphCard";
 import NavBar from "../components/NavBar";
 
-class Home extends Component {
-  render() {
-    return (
-      <div>
-        <NavBar />
-        <FakeGraphCard />
-      </div>
-    );
-  }
+function Home({ currentUser }) {
+  return (
+    <div>
+      <NavBar currentUser={currentUser} />
+      <FakeGraphCard />
+    </div>
+  );
 }
 
 export default Home;

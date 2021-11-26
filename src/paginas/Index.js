@@ -82,7 +82,11 @@ export default function Index(props) {
     <Router>
       {props.currentUser ? (
         <Switch>
-          <Route exact path={"/"} render={() => <Home />}></Route>
+          <Route
+            exact
+            path={"/"}
+            render={() => <Home currentUser={props.currentUser} />}
+          ></Route>
           <Route
             path={"/logout"}
             render={() => (
@@ -93,12 +97,24 @@ export default function Index(props) {
               />
             )}
           ></Route>
-          <Route path={"/newSet"} component={NewSet}>
+          <Route
+            path={"/newSet"}
+            render={() => <NewSet currentUser={props.currentUser} />}
+          >
             {/* <NewSet /> */}
           </Route>
-          <Route path={"/sets"} component={Sets}></Route>
-          <Route path={"/users"} component={Users}></Route>
-          <Route path={"/newUser"} component={NewUser}></Route>
+          <Route
+            path={"/sets"}
+            render={() => <Sets currentUser={props.currentUser} />}
+          ></Route>
+          <Route
+            path={"/users"}
+            render={() => <Users currentUser={props.currentUser} />}
+          ></Route>
+          <Route
+            path={"/newUser"}
+            render={() => <NewUser currentUser={props.currentUser} />}
+          ></Route>
         </Switch>
       ) : (
         <Switch>
